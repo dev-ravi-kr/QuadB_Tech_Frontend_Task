@@ -23,6 +23,7 @@ export default function TodoForm() {
             setInput(e.target.value);
           }}
         />
+        <button type="submit">add task</button>
       </form>
     </div>
   );
