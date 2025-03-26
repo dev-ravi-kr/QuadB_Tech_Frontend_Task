@@ -28,11 +28,12 @@ export const todoSlice = createSlice({
       state.todos = state.todos.filter((todoItem) => todoItem.id !== id);
     },
     toggle: (state, action) => {
-      const { id, completed } = action.payload;
+      const { id } = action.payload;
       state.todos = state.todos.map((todoItem) => {
         if (todoItem.id === id) {
-          return { ...todoItem, completed: !completed };
+          return { ...todoItem, completed: !todoItem.completed };
         }
+        return todoItem;
       });
     },
   },
@@ -41,6 +42,5 @@ export const todoSlice = createSlice({
 export const { add, remove, toggle, update } = todoSlice.actions;
 
 // console.log(add({todoText: "ajhsgd fha"}));
-
 
 export default todoSlice.reducer;
