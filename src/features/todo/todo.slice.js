@@ -10,7 +10,12 @@ export const todoSlice = createSlice({
   reducers: {
     add: (state, action) => {
       const { todoText } = action.payload;
-      const newTask = { id: nanoid(), task: todoText, completed: false };
+      const newTask = {
+        id: nanoid(),
+        task: todoText,
+        completed: false,
+        priorityLevel: 1,
+      };
       state.todos.push(newTask);
     },
     update: (state, action) => {
@@ -36,10 +41,19 @@ export const todoSlice = createSlice({
         return todoItem;
       });
     },
+    setPriority: (state, action) => {
+      state.todos = state.todos.map((todoItem) => {
+        const { id, priorityLevel } = action.payload;
+        if (todoItem.id === id) {
+          return { ...todoItem, priorityLevel };
+        }
+        return todoItem;
+      });
+    },
   },
 });
 
-export const { add, remove, toggle, update } = todoSlice.actions;
+export const { add, remove, toggle, update,setPriority } = todoSlice.actions;
 
 // console.log(add({todoText: "ajhsgd fha"}));
 
