@@ -6,6 +6,7 @@ export default function Logout() {
   const logoutHandler = (e) => {
     e;
     dispatch(logout());
+    sessionStorage.removeItem("user");
   };
 
   return (

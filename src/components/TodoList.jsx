@@ -1,6 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import TodoItem from "./TodoItem";
-import { remove, toggle, setPriority } from "./../features/todo/todo.slice";
+import {
+  remove,
+  toggle,
+  setPriority,
+  setTodoList,
+} from "./../features/todo/todo.slice";
+import { useEffect } from "react";
 
 export default function TodoList() {
   const { todos } = useSelector((state) => state.todos);
@@ -22,6 +28,21 @@ export default function TodoList() {
       dispatch(setPriority({ id, priorityLevel: e.target.value }));
     };
   };
+
+  useEffect(() => {
+    const lsUser = JSON.parse(localStorage.getItem("user"));
+    const ssUser = JSON.parse(sessionStorage.getItem("user"))
+
+    if (lsUser.username === ssUser.username) {
+      dispatch(
+        setTodoList({ todoList: JSON.parse(localStorage.getItem("todoList")) })
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todos));
+  }, [todos]);
 
   // console.log(todos);
 

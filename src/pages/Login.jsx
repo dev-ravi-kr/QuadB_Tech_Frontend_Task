@@ -11,6 +11,12 @@ export default function Login() {
     e.preventDefault();
     const user = { username, password };
     dispatch(login(user));
+    sessionStorage.setItem("user", JSON.stringify(user));
+    const lsUser = JSON.parse(localStorage.getItem("user"));
+    if (lsUser.username !== user.username) {
+      localStorage.setItem("user", JSON.stringify(user));
+      localStorage.removeItem("todoList");
+    }
     setUsername("");
     setPassword("");
   };

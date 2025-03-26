@@ -50,10 +50,16 @@ export const todoSlice = createSlice({
         return todoItem;
       });
     },
+    setTodoList: (state, action) => {
+      if (state.todos.length <= 0) {
+        state.todos = action.payload.todoList;
+      }
+    },
   },
 });
 
-export const { add, remove, toggle, update,setPriority } = todoSlice.actions;
+export const { add, remove, toggle, update, setPriority, setTodoList } =
+  todoSlice.actions;
 
 // console.log(add({todoText: "ajhsgd fha"}));
 
